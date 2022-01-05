@@ -22,6 +22,9 @@ public class WriteHandlers {
     private static final ChannelHandlerContext CHANNEL_HANDLER_CONTEXT_FROM_SOMEWHERE = DUMMY_INSTANCE;
     private static final ChannelPipeline CHANNEL_PIPELINE_FROM_SOMEWHERE = DummyChannelPipeline.DUMMY_INSTANCE;
 
+    public static void main(String[] args) {
+        writeViaChannel();
+    }
     /**
      * 代码清单 6-6 从 ChannelHandlerContext 访问 Channel
      * */
@@ -30,6 +33,7 @@ public class WriteHandlers {
         //获取到与 ChannelHandlerContext相关联的 Channel 的引用
         Channel channel = ctx.channel();
         //通过 Channel 写入缓冲区
+        //调用Channel 上的 write()方法将会导致写入事件从尾端到头部地流经 ChannelPipeline。
         channel.write(Unpooled.copiedBuffer("Netty in Action",
                 CharsetUtil.UTF_8));
 

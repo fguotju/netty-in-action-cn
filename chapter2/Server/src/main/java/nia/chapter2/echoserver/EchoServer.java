@@ -43,7 +43,7 @@ public class EchoServer {
         try {
             //(2) 创建ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
-            b.group(group)
+            b.group(group)//采用NIO传输，使用NioEventLoop来接受和处理新连接
                 //(3) 指定所使用的 NIO 传输 Channel
                 .channel(NioServerSocketChannel.class)
                 //(4) 使用指定的端口设置套接字地址

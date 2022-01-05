@@ -1,6 +1,9 @@
 package nia.chapter5;
 
-import io.netty.buffer.*;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.CompositeByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -165,6 +168,7 @@ public class ByteBufExamples {
         // Fills the writable bytes of a buffer with random integers.
         ByteBuf buffer = BYTE_BUF_FROM_SOMEWHERE; //get reference form somewhere
         while (buffer.writableBytes() >= 4) {
+            //int 4字节
             buffer.writeInt(random.nextInt());
         }
     }
@@ -186,7 +190,7 @@ public class ByteBufExamples {
      */
     public static void byteBufProcessor() {
         ByteBuf buffer = BYTE_BUF_FROM_SOMEWHERE; //get reference form somewhere
-        int index = buffer.forEachByte(ByteBufProcessor.FIND_CR);
+        int index = buffer.forEachByte(ByteProcessor.FIND_CR);
     }
 
     /**
@@ -244,6 +248,9 @@ public class ByteBufExamples {
         assert writerIndex == buf.writerIndex();
     }
 
+    public static void main(String[] args) {
+        byteBufWriteRead();
+    }
     /**
      * 代码清单 5-13 ByteBuf 上的 read()和 write()操作
      */

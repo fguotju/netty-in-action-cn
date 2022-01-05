@@ -17,6 +17,7 @@ import io.netty.util.CharsetUtil;
 public class EchoClientHandler
     extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
+    //在到服务器的连接已经建立之后将被调用
     public void channelActive(ChannelHandlerContext ctx) {
         //当被通知 Channel是活跃的时候，发送一条消息
         ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks!",
@@ -24,6 +25,7 @@ public class EchoClientHandler
     }
 
     @Override
+    //当从服务器接收到一条消息时被调用
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf in) {
         //记录已接收消息的转储
         System.out.println(

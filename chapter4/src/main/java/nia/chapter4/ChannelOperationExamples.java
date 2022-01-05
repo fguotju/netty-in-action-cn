@@ -8,6 +8,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.CharsetUtil;
 
+import java.nio.channels.SelectionKey;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -28,6 +29,7 @@ public class ChannelOperationExamples {
         //创建持有要写数据的 ByteBuf
         ByteBuf buf = Unpooled.copiedBuffer("your data", CharsetUtil.UTF_8);
         ChannelFuture cf = channel.writeAndFlush(buf);
+        SelectionKey
         //添加 ChannelFutureListener 以便在写操作完成后接收通知
         cf.addListener(new ChannelFutureListener() {
             @Override

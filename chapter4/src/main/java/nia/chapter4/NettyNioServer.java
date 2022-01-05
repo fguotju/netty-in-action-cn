@@ -3,7 +3,11 @@ package nia.chapter4;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -26,7 +30,8 @@ public class NettyNioServer {
         try {
             //创建ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
-            b.group(group).channel(NioServerSocketChannel.class)
+            b.group(group)
+                    .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
                     //指定 ChannelInitializer，对于每个已接受的连接都调用它
                     .childHandler(new ChannelInitializer<SocketChannel>() {
